@@ -7,6 +7,7 @@
 
 """Script to generate synthetic fair data from experimental design 1 ( random numbers of PGE2 on defined conditions ) for twoc"""
 
+import os
 from scipy.stats import norm, skewnorm
 import csv
 
@@ -14,6 +15,10 @@ import csv
 N = 5000
 S_noticu = N - N*0.02
 S_icu = N*0.02
+
+# path to output dir
+path = os.getcwd() + "/out"
+if not os.path.isdir(path): os.makedirs(path)
 
 # output
 out_file = 'out/exp1_random_sdata.csv'
