@@ -9,7 +9,7 @@ obo = Namespace("http://purl.obolibrary.org/obo#")
 
 has_part = obo.BFO_0000051
 
-def generate_crf(n, s, p, m):
+def generate_crf(n, s, m, p):
     crf = Graph()
     crf.bind("vodan", vodan)
     crf.bind("vodan_inst", vodan_inst)
@@ -77,6 +77,7 @@ if __name__ == "__main__":
 
     with open(sys.argv[1]) as file:
         for line in file:
-            (n, s, p, m) = line.rstrip().split(",")
-            crf = generate_crf(n, s, p, m)
+            (n, s, m, p) = line.rstrip().split(",")
+            crf = generate_crf(n, s, m, p)
             print(crf.serialize(format="turtle").decode("UTF-8"))
+            print(n,s,m,p)
