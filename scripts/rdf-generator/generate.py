@@ -60,10 +60,6 @@ def generate_crf(n, s, m, p):
     crf.add((corticosteroid, RDF.type, vodan.Corticosteroid))
     if m == "1":
         crf.add((corticosteroid, vodan.has_value, vodan_inst.C49488))
-        #agent = BNode()
-        #crf.add((corticosteroid, has_part, agent))
-        #crf.add((agent, RDF.type, vodan.Maximum_daily_corticosteroid_dose))
-        #crf.add((agent, vodan.has_literal_value, Literal("3 mg"))) # replace with csv value?
     else:
         crf.add((corticosteroid, vodan.has_value, vodan_inst.C49487))
 
