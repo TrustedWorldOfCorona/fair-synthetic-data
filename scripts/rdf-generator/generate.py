@@ -80,4 +80,3 @@ if __name__ == "__main__":
             (n, s, m, p) = line.rstrip().split(",")
             crf = generate_crf(n, s, m, p)
             print(crf.serialize(format="turtle").decode("UTF-8"))
-            print(n,s,m,p)
