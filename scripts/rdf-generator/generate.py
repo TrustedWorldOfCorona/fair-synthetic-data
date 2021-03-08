@@ -1,5 +1,5 @@
 import sys
-from rdflib import Namespace, Graph, URIRef, BNode, Literal
+from rdflib import Namespace, Graph, BNode, Literal
 from rdflib.namespace import RDF, XSD
 
 twoc = Namespace("http://example.com/twoc#")
@@ -18,7 +18,7 @@ def generate_crf(n, s, m, p):
     entry = twoc[n]
 
     crf.add((entry, RDF.type, vodan["who-covid-19-rapid-crf"]))
-    crf.add((entry, vodan.participant_id, Literal(n)))
+    crf.add((entry, vodan.participant_id, Literal(n.zfill(5))))
 
     # admission module
     module1 = BNode()
@@ -67,12 +67,19 @@ def generate_crf(n, s, m, p):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Missing CSV input parameter. Example usage:")
-        print(f"\t python {sys.argv[0]} data.csv")
+        print("Missing CSV input and output location parameters. Example usage:")
+        print(f"\tpython {sys.argv[0]} data.csv ../out")
         exit(1)
+    if len(sys.argv) < 3:
+        print("Missing output location parameter. Example usage:")
+        print(f"\tpython {sys.argv[0]} data.csv ../out")
+        exit(2)
 
     with open(sys.argv[1]) as file:
+        # skip header line
+        next(file)
+
         for line in file:
             (n, s, m, p) = line.rstrip().split(",")
             crf = generate_crf(n, s, m, p)
-            print(crf.serialize(format="turtle").decode("UTF-8"))
+            crf.serialize(f"{sys.argv[2]}/{n.zfill(5)}.ttl", format="turtle")
