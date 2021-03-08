@@ -5,7 +5,7 @@ from rdflib.namespace import RDF, XSD
 twoc = Namespace("http://example.com/twoc#")
 vodan = Namespace("http://purl.org/vodan/whocovid19crfsemdatamodel/")
 vodan_inst = Namespace("http://purl.org/vodan/whocovid19crfsemdatamodel/instances/")
-obo = Namespace("http://purl.obolibrary.org/obo#")
+obo = Namespace("http://purl.obolibrary.org/obo/")
 
 has_part = obo.BFO_0000051
 
@@ -24,16 +24,10 @@ def generate_crf(n, s, m, p):
     module1 = BNode()
     crf.add((entry, has_part, module1))
     crf.add((module1, RDF.type, vodan.Module_1))
-    # TODO
-
-    # followup module
-    module2 = BNode()
-    crf.add((entry, has_part, module2))
-    crf.add((module2, RDF.type, vodan.Module_2))
 
     # Supportive care section
     supportive_care = BNode()
-    crf.add((module2, has_part, supportive_care))
+    crf.add((module1, has_part, supportive_care))
     crf.add((supportive_care, RDF.type, vodan.Supportive_care))
     icu_admission = BNode()
     crf.add((supportive_care, has_part, icu_admission))
@@ -44,7 +38,7 @@ def generate_crf(n, s, m, p):
 
     # Lab result section
     lab_results = BNode()
-    crf.add((module2, has_part, lab_results))
+    crf.add((module1, has_part, lab_results))
     crf.add((lab_results, RDF.type, vodan.Laboratory_results))
     pge2 = BNode()
     crf.add((lab_results, has_part, pge2))
@@ -53,7 +47,7 @@ def generate_crf(n, s, m, p):
 
     # Medication section
     medication = BNode()
-    crf.add((module2, has_part, medication))
+    crf.add((module1, has_part, medication))
     crf.add((medication, RDF.type, vodan.Medication))
     corticosteroid = BNode()
     crf.add((medication, has_part, corticosteroid))
