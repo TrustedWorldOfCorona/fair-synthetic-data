@@ -1,4 +1,5 @@
 import sys
+import os
 from rdflib import Namespace, Graph, BNode, Literal
 from rdflib.namespace import RDF, XSD
 
@@ -62,12 +63,17 @@ def generate_crf(n, s, m, p):
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Missing CSV input and output location parameters. Example usage:")
-        print(f"\tpython {sys.argv[0]} data.csv ../out")
+        print(f"\tpython {sys.argv[0]} ../randomizer/out/exp1_random_sdata.csv ./out")
         exit(1)
     if len(sys.argv) < 3:
         print("Missing output location parameter. Example usage:")
-        print(f"\tpython {sys.argv[0]} data.csv ../out")
+        print(f"\tpython {sys.argv[0]} ../randomizer/out/exp1_random_sdata.csv ./out")
         exit(2)
+
+    out_path = sys.argv[2]    
+
+    if not os.path.isdir(out_path):
+        os.makedirs(out_path)
 
     with open(sys.argv[1]) as file:
         # skip header line
@@ -76,4 +82,4 @@ if __name__ == "__main__":
         for line in file:
             (n, s, m, p) = line.rstrip().split(",")
             crf = generate_crf(n, s, m, p)
-            crf.serialize(f"{sys.argv[2]}/{n.zfill(5)}.ttl", format="turtle")
+            crf.serialize(f"{out_path}/{n.zfill(5)}.ttl", format="turtle")
