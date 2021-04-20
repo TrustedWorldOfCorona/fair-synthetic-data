@@ -17,11 +17,11 @@ S_noticu = N - N*0.02
 S_icu = N*0.02
 
 # path to output dir
-path = os.getcwd() + "/out"
+path = os.getcwd() + "../out"
 if not os.path.isdir(path): os.makedirs(path)
 
 # output
-out_file = 'out/exp2_random_sdata.csv'
+out_file = '../out/exp2_random_sdata.csv'
 f = open(out_file, 'w')
 fieldNames = ['Patient_number', 'S', 'M', 'P']
 writer = csv.DictWriter(f, fieldnames=fieldNames)
