@@ -21,7 +21,7 @@ path = os.getcwd() + "/out"
 if not os.path.isdir(path): os.makedirs(path)
 
 # output
-out_file = 'out/exp2_random_sdata.csv'
+out_file = 'out/exp1_random_sdata.csv'
 f = open(out_file, 'w')
 fieldNames = ['Patient_number', 'S', 'M', 'P']
 writer = csv.DictWriter(f, fieldnames=fieldNames)
@@ -39,8 +39,7 @@ while i <= N:
        else:
           M = 0
        # PGE2 level: assign random value from normal distribution, [0.0, 1.0] mean=0.5
-       # ELEVATED PGE2 level > 0.75 (or mean + 2*std)
-       P = norm.rvs(loc=0.5, scale=0.125)
+       P = abs(norm.rvs(loc=0.5, scale=1))
     # severe patients (ICU)
     else:   
        S = 1
@@ -49,8 +48,8 @@ while i <= N:
           M = 0
        else:
           M = 1
-       # PGE2 level: assign random value from a negative skewed normal distribution, [0.0, 1.0] mean=0.95
-       P = skewnorm.rvs(a=-4, loc=0.95, scale=0.05)
+       # PGE2 level: assign random value from a negative skew normal distribution, [0.0, 1.0] mean=0.95
+       P = abs(skewnorm.rvs(a=0.1, loc=0.95, scale=1))
     
     writer.writerow({'Patient_number': i, 'S': S, 'M': M, 'P': round(P,4)})
     i += 1
