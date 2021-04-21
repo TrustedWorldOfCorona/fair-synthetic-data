@@ -63,11 +63,11 @@ def generate_crf(n, s, m, p):
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Missing CSV input and output location parameters. Example usage:")
-        print(f"\tpython {sys.argv[0]} ../randomizer/out/exp1_random_sdata.csv ./out")
+        print(f"\tpython {sys.argv[0]} ../out/exp2_random_sdata.csv ../out")
         exit(1)
     if len(sys.argv) < 3:
         print("Missing output location parameter. Example usage:")
-        print(f"\tpython {sys.argv[0]} ../randomizer/out/exp1_random_sdata.csv ./out")
+        print(f"\tpython {sys.argv[0]} ../out/exp2_random_sdata.csv ../out")
         exit(2)
 
     out_path = sys.argv[2]    

@@ -6,5 +6,5 @@
 ## Usage
 ```bash
 pip install -r requirements.txt
-python generate.py ../randomizer/out/exp1_random_sdata.csv ./out
+python generate.py ../out/exp2_random_sdata.csv ../out
 ```
