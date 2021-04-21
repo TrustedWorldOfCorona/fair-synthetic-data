@@ -53,10 +53,7 @@ def generate_crf(n, s, m, p):
     corticosteroid = BNode()
     crf.add((medication, has_part, corticosteroid))
     crf.add((corticosteroid, RDF.type, vodan.Corticosteroid))
-    if m == "1":
-        crf.add((corticosteroid, vodan.has_value, vodan_inst.C49488))
-    else:
-        crf.add((corticosteroid, vodan.has_value, vodan_inst.C49487))
+    crf.add((corticosteroid, vodan.has_value, vodan_inst.C49488 if m == "1" else vodan_inst.C49487))
 
     return crf
 
