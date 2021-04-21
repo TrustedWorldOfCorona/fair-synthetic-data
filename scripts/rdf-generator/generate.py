@@ -82,8 +82,4 @@ if __name__ == "__main__":
         for line in file:
             (n, s, m, p) = line.rstrip().split(",")
             crf = generate_crf(n, s, m, p)
-<<<<<<< HEAD
-            print(crf.serialize(format="turtle").decode("UTF-8"))
-=======
             crf.serialize(f"{out_path}/{n.zfill(5)}.ttl", format="turtle")
->>>>>>> upstream/develop
