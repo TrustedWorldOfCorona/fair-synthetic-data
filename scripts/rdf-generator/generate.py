@@ -53,21 +53,18 @@ def generate_crf(n, s, m, p):
     corticosteroid = BNode()
     crf.add((medication, has_part, corticosteroid))
     crf.add((corticosteroid, RDF.type, vodan.Corticosteroid))
-    if m == "1":
-        crf.add((corticosteroid, vodan.has_value, vodan_inst.C49488))
-    else:
-        crf.add((corticosteroid, vodan.has_value, vodan_inst.C49487))
+    crf.add((corticosteroid, vodan.has_value, vodan_inst.C49488 if m == "1" else vodan_inst.C49487))
 
     return crf
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Missing CSV input and output location parameters. Example usage:")
-        print(f"\tpython {sys.argv[0]} ../randomizer/out/exp1_random_sdata.csv ./out")
+        print(f"\tpython {sys.argv[0]} ../out/exp2_random_sdata.csv ../out")
         exit(1)
     if len(sys.argv) < 3:
         print("Missing output location parameter. Example usage:")
-        print(f"\tpython {sys.argv[0]} ../randomizer/out/exp1_random_sdata.csv ./out")
+        print(f"\tpython {sys.argv[0]} ../out/exp2_random_sdata.csv ../out")
         exit(2)
 
     out_path = sys.argv[2]    
@@ -82,8 +79,4 @@ if __name__ == "__main__":
         for line in file:
             (n, s, m, p) = line.rstrip().split(",")
             crf = generate_crf(n, s, m, p)
-<<<<<<< HEAD
-            print(crf.serialize(format="turtle").decode("UTF-8"))
-=======
             crf.serialize(f"{out_path}/{n.zfill(5)}.ttl", format="turtle")
->>>>>>> upstream/develop

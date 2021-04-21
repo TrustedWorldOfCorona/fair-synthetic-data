@@ -6,5 +6,5 @@
 
 ## Usage
 ```bash
-python precompute_patient_totals.py ../randomizer/out/exp1_random_sdata.csv
+python precompute_patient_totals.py ../out/exp2_random_sdata.csv
 ```
