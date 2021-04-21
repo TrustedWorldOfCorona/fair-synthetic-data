@@ -17,7 +17,7 @@ S_noticu = N - N*0.02
 S_icu = N*0.02
 
 # path to output dir
-path = os.getcwd() + "../out"
+path = os.path.join("..", "out")
 if not os.path.isdir(path): os.makedirs(path)
 
 # output
